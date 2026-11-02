@@ -1,0 +1,18 @@
+:root {
+  color-scheme: dark;
+  --background: #101214;
+  --green: #245c52;
+  --mint: #54e3c2;
+  --light: #d0d5d8;
+  --sage: #547f75;
+  --surface: #263c36;
+  --muted: #c4d1cd;
+  --ink: #102420;
+  --radius: 1.375rem;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-synthesis: none;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #fff;
+  background: var(--background);
+}

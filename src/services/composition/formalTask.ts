@@ -1,0 +1,5 @@
+import type {MusicIntent} from './musicIntent';
+export const ACTIVE_MUSIC_KEY='wanwu:music:active:v1';
+export type FormalTask={id:string;sessionId:string;source:'live'|'mock';localMock:boolean;status:'submitting'|'pending'|'unknown'|'complete'|'rejected';createdAt:number;duration:number;intent?:MusicIntent;prompt?:string;error?:string};
+export function readFormalTask():FormalTask|undefined{let raw:string|null=null;try{raw=localStorage.getItem(ACTIVE_MUSIC_KEY);if(!raw)return;const t=JSON.parse(raw);if(typeof t.id!=='string'||!t.id||!['live','mock'].includes(t.source)||!Number.isFinite(t.duration))throw Error();return{...t,status:t.status==='complete'?'complete':'unknown'};}catch{return raw?{id:'corrupt-formal-task-unknown',sessionId:'unknown',source:'live',localMock:false,status:'unknown',createdAt:0,duration:90,error:'当前任务记录损坏，不能确定是否已提交，请保留记录并核查，不要重新生成'}:undefined;}}
+export function writeFormalTask(task:FormalTask|undefined){if(task)localStorage.setItem(ACTIVE_MUSIC_KEY,JSON.stringify(task));else localStorage.removeItem(ACTIVE_MUSIC_KEY);}
